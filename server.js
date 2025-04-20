@@ -6,7 +6,8 @@ const PORT = 9876;
 const WINDOW_SIZE = 10; 
 const BASE_URL = 'http://20.244.56.144/evaluation-service';  
 
-const BEARER_TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJNYXBDbGFpbXMiOnsiZXhwIjoxNzQ1MTMxNTU0LCJpYXQiOjE3NDUxMzEyNTQsImlzcyI6IkFmZm9yZG1lZCIsImp0aSI6ImUyMzZjYzlmLWYzZDEtNGEwYy1hOTcxLTVmMTI2ZmUxZGRmNiIsInN1YiI6ImNzMjJiMTAwM0BpaWl0ZG0uYWMuaW4ifSwiZW1haWwiOiJjczIyYjEwMDNAaWlpdGRtLmFjLmluIiwibmFtZSI6ImNoYWxpbWV0aSBwcmFuYXkiLCJyb2xsTm8iOiJjczIyYjEwMDMiLCJhY2Nlc3NDb2RlIjoid2NISHJwIiwiY2xpZW50SUQiOiJlMjM2Y2M5Zi1mM2QxLTRhMGMtYTk3MS01ZjEyNmZlMWRkZjYiLCJjbGllbnRTZWNyZXQiOiJubXJQU1VnVktrSnp0VkdBIn0.CXAVWkKdqV54ZBRBvNpW9vfzZzMOqJauOyeYPsgBCDU';
+//in a hurry kept token(it will expire) here but we should use .env for these type of credentials
+const BEARER_TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJNYXBDbGFpbXMiOnsiZXhwIjoxNzQ1MTMyNTE0LCJpYXQiOjE3NDUxMzIyMTQsImlzcyI6IkFmZm9yZG1lZCIsImp0aSI6ImUyMzZjYzlmLWYzZDEtNGEwYy1hOTcxLTVmMTI2ZmUxZGRmNiIsInN1YiI6ImNzMjJiMTAwM0BpaWl0ZG0uYWMuaW4ifSwiZW1haWwiOiJjczIyYjEwMDNAaWlpdGRtLmFjLmluIiwibmFtZSI6ImNoYWxpbWV0aSBwcmFuYXkiLCJyb2xsTm8iOiJjczIyYjEwMDMiLCJhY2Nlc3NDb2RlIjoid2NISHJwIiwiY2xpZW50SUQiOiJlMjM2Y2M5Zi1mM2QxLTRhMGMtYTk3MS01ZjEyNmZlMWRkZjYiLCJjbGllbnRTZWNyZXQiOiJubXJQU1VnVktrSnp0VkdBIn0.ocoEMTL78-ckILK9X629mvK3_12QkScGQmgfjcdclOI';
 
 let numberWindow = [];
 let totalSum = 0;
@@ -69,18 +70,14 @@ const updateNumberWindow = (newNumbers) => {
 
 app.get('/numbers/:numberId', async (req, res) => {
   const { numberId } = req.params;
-
- 
   const newNumbers = await fetchNumbers(numberId);
-
-  
   const windowPrevState = [...numberWindow];
-
-  
   updateNumberWindow(newNumbers);
 
-
   const avg = calculateAverage();
+  const windowPrevStateFormatted = windowPrevState.join(' ');
+  const windowCurrStateFormatted = numberWindow.join(' ');
+  const numbersFormatted = newNumbers.join(' ');
 
 
   res.json({
