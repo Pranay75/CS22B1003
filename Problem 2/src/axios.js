@@ -1,5 +1,6 @@
 import axios from 'axios';
-
+import dotenv from 'dotenv'
+dotenv.config();
 
 const BASE_URL = 'http://20.244.56.144/evaluation-service';
 
@@ -7,7 +8,7 @@ const BASE_URL = 'http://20.244.56.144/evaluation-service';
 const apiClient = axios.create({
   baseURL: BASE_URL,
   headers: {
-    Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJNYXBDbGFpbXMiOnsiZXhwIjoxNzQ1MTMwMDIxLCJpYXQiOjE3NDUxMjk3MjEsImlzcyI6IkFmZm9yZG1lZCIsImp0aSI6ImUyMzZjYzlmLWYzZDEtNGEwYy1hOTcxLTVmMTI2ZmUxZGRmNiIsInN1YiI6ImNzMjJiMTAwM0BpaWl0ZG0uYWMuaW4ifSwiZW1haWwiOiJjczIyYjEwMDNAaWlpdGRtLmFjLmluIiwibmFtZSI6ImNoYWxpbWV0aSBwcmFuYXkiLCJyb2xsTm8iOiJjczIyYjEwMDMiLCJhY2Nlc3NDb2RlIjoid2NISHJwIiwiY2xpZW50SUQiOiJlMjM2Y2M5Zi1mM2QxLTRhMGMtYTk3MS01ZjEyNmZlMWRkZjYiLCJjbGllbnRTZWNyZXQiOiJubXJQU1VnVktrSnp0VkdBIn0.90xnhCFni4-_axX1OeI9OCtgTbVacgpOKAfYOQWncBw"
+    Authorization: `Bearer ${process.env.token}`
   }
 });
 
